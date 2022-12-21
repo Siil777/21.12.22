@@ -1,0 +1,70 @@
+#Проверка личного кода
+#Безконечно запрашиваем личный код.
+#Проверяем его:
+#- если 11 символов/чисел, то продолжаем проверку, если нет, то сообщить, что кол-во цифт не верное и запрашивает новый личный код,
+#Первый символ только:1,2,3,4,5,6, если числа другие, то прерываем проверку и запрашиваем новый личный код,
+#Второй-седьмой символы- должны сообветствовать цифрам дат рождения, если нет, то новый личный код,
+#Найти контрольный номер (смотри ниже пояснение)
+#* Если личный код правильный, то добавить его в список ikoodid, а на экран вывсти фразу:
+#Это {пол}, его/ее день рождения {дата рождения}  и место рождения {название города и больницы}
+#* Если код не верный, то он добавляется в список arvud
+#После прерывания бесконечного цикла проверки, надо вывести на экран оба списка (ikoodid, arvud).
+#Способ остановки цикла придумайте сами.
+#Например: Если личный код 47610112243, то будет след. фраза: Это женцина, его/ее дрождения 11.10.1976  и место рождения Ida-Viru Keskhaigla (Kohtla-Järve, endine Jõhvi).
+
+from datetime import*
+while True:
+    n=input("isikukood:")
+    if len(n)==11:
+        try:
+            n_list=list(n)
+            if int(n_list[0]) in [1,2,3,4,5,6]:
+                if int(n_list[0]) in [1,2]:
+                    y=1800
+                if int(n_list[0]) in [3,4]:
+                    y=1900
+                if int(n_list[0]) in [5,6]:
+                    y=2000
+                years=(n_list[1]+ n_list[2])
+                month=(n_list[3]+n_list[4])
+                day=(n_list[5]+n_list[5])
+                if datetime(years,month,day):
+                    if i==10:
+                        s+=i*int(n_list[i-1])
+                else:
+                        s+=(i+1)*int(n_list[i-1])
+                                                      # делаем целое число
+
+                s=0                
+                for i in range(10):
+                    s+=(i%9+1)*int(n_list[i])
+                    print(f"{i%9+1}*{int(n_list[i])}+", end="")
+             
+                    if n>1 and n<=10:
+                      hospital="Kuresare"
+                    elif n>10 and n<=19:
+                                hospital="Tartu"
+                    elif n>19 and n<=220:
+                                hospital="Ida-Tallinna Keskhaigla, Pelgulinna sünnitusmaja, Hiiumaa, Keila, Rapla haigla, Loksa haigla"
+                    elif n>220 and n<=270:
+                                hospital=" Ida-Viru Keskhaigla (Kohtla-Järve, endine Jõhvi)"
+                    elif n>270 and n<=370:
+                                hospital="Maarjamõisa Kliinikum (Tartu), Jõgeva Haigla"
+                    elif n>370 and n<=420:
+                                hospital="Narva hospital"
+                    elif n>420 and n<=470:
+                                hospital="Parnu hospital"
+                    elif n>470 and n<=490:
+                                hospital="Pelgulinna Sünnitusmaja (Tallinn), Haapsalu haigla"
+                    elif n>490 and n<=520:
+                                hospital=" Järvamaa Haigla (Paide)"
+                    elif n>520 and n<=570:
+                                hospital="Rakvere, Tapa haigla"
+                    elif n>570 and n<=600:
+                                hospital="Valga hospital"
+                    elif n>600 and n<=650:
+                                hospital="Viljandi hospital"
+                    elif n>650 and n<=700:
+                        print(hospital)
+        except:
+            print("incorrect")
